@@ -29,3 +29,16 @@ n2 = n/10;
 int i;
 ```
 Deklaration der verschiedene Variabeln für die Darstellung, Sek = n2 * 10 + n1. Die Variabeln werden auf eine Länge von 8bit gesetzt auf Grund der 8bit Architektur des Atmega8s. int i dient als Zählervariabel in den Kommenden Schleifen.
+```
+for(i = 0; i < n1; i++){
+  PORTB &= ~(1 << PB3);
+  PORTB &= ~(1 << PB4);
+  PORTB |= (1 << PB3);
+}
+
+for(i = 0; i < 12 - n1; i++){
+  PORTB &= ~(1 << PB3);
+  PORTB |= (1 << PB4);
+  PORTB |= (1 << PB3);
+}
+```
