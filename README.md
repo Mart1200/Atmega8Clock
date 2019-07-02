@@ -68,3 +68,25 @@ _delay_ms(1);
 PORTB &= ~(1 << PB0);
 ```
 Selbes Vorgehen wie bei Spalte 1.
+## Deaktivieren der Anzeige/ Aufwecken mit Tastendruck
+```
+#include <avr/interrupt.h>
+#include <avr/sleep.h>
+
+volatile uint8_t counter = 0;
+```
+Includen der benötigten Funktionen, und setzen einer globalen Variabel zum Zählen der Sekunden bis zur Deaktivierung.
+In der main():
+```
+DDRD &= ~(1 << DDD2); // Interrupt-Port auf Input
+PORTD |= (1 << PORTD2);//Freigeben interrupt schalter
+
+MCUCR |= (1<<ISC01) | (1 << ISC00); //setzen des Interrupts auf Flanken;
+GICR |= (1 << INT0); // aktivieren des Interrupts
+```
+Freischalten des Interrupt-Pins am Atmega8 und Konfiguration des Interruppts.
+```
+set_sleep_mode(SLEEP_MODE_PWR_SAVE);
+sei();
+```
+Konfiguration des Slee-Modes auf einen Modi, der externe Interrupts zu lässt und Ermöglichung von Interrupts durch sei().
