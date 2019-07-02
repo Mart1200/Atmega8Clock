@@ -20,3 +20,12 @@ DDRB |= (1 << PB0); //Spalte 2
 PORTB |= (1 << PB2);
 ```
 Am Anfang werden die entsprechen Pins am Atmega auf Ausgang gesetzs und der Strobo-Pin am IC auf 1, für die korrekte Konfiguration.
+```
+uint8_t n1, n2;
+
+n1 = n%10;
+n2 = n/10;
+
+int i;
+```
+Deklaration der verschiedene Variabeln für die Darstellung, Sek = n2 * 10 + n1. Die Variabeln werden auf eine Länge von 8bit gesetzt auf Grund der 8bit Architektur des Atmega8s. int i dient als Zählervariabel in den Kommenden Schleifen.
