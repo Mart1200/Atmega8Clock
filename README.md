@@ -42,3 +42,29 @@ for(i = 0; i < 12 - n1; i++){
   PORTB |= (1 << PB3);
 }
 ```
+In diesem Abschnitt werden Register belegt für die erste Spalte belegt, 0 stehen für leuchtende LEDs, 1 für deaktivierte.
+```
+PORTB |= (1 << PB1);
+_delay_ms(1); //evtl noch durch anderen Timmer zu ersetzen
+PORTB &= ~(1 << PB1);
+```
+Aktivieren der ersten Spalte und dadurch aktivieren der LEDs, nach kurzer Zeit deaktievieren der LEDs.
+```
+for(i = 0; i < n2; i++){
+  PORTB &= ~(1 << PB3);
+  PORTB &= ~(1 << PB4);
+  PORTB |= (1 << PB3);
+}
+
+for(i = 0; i < 12 - n2; i++){
+  PORTB &= ~(1 << PB3);
+  PORTB |= (1 << PB4);
+  PORTB |= (1 << PB3);
+}
+
+
+PORTB |= (1 << PB0);
+_delay_ms(1);
+PORTB &= ~(1 << PB0);
+```
+Selbes Vorgehen wie bei Spalte 1.
