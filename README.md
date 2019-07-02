@@ -109,3 +109,12 @@ ISR (INT0_vect){
 }
 ```
 Falls der Schalter gedrückt wird resetet der counter und fängt von vorne an zu zählen.
+## Schalten der Zeit mit externen Quarz
+Konfiguration des Quarzes:
+```
+ASSR |= (1<<AS2);
+TCCR2 |= (1 << CS21); //prescaler timer 2
+TCNT2 = 0x00;
+TIFR |= (1 << TOV2);
+TIMSK |= (1 << TOIE2); //overflow interrupt erlauben
+```
