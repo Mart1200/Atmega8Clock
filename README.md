@@ -90,3 +90,22 @@ set_sleep_mode(SLEEP_MODE_PWR_SAVE);
 sei();
 ```
 Konfiguration des Slee-Modes auf einen Modi, der externe Interrupts zu lässt und Ermöglichung von Interrupts durch sei().
+```
+while(1){
+  if(counter >= 30){
+    sleep_mode();
+  }else{
+    setSek(sekunde);
+    setMin(minute);
+    setHour(stunde);
+  }
+}
+```
+Wenn der Counter auf 30 geht, Aktivierung Sleep-Mode, sonst darstellung der Zeit durch oben erläuterte Funktionen.
+die Interrupt-Funktion:
+```
+ISR (INT0_vect){
+	counter = 0;
+}
+```
+Falls der Schalter gedrückt wird resetet der counter und fängt von vorne an zu zählen.
