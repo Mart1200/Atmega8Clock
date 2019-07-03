@@ -110,7 +110,7 @@ ISR (INT0_vect){
 ```
 Falls der Schalter gedrückt wird resetet der counter und fängt von vorne an zu zählen.
 ## Schalten der Zeit mit externen Quarz
-Für die Zeit brauchen wir 3 Verschiedene Variabel, die jeweils die aktuelle Stunde, Minute und Sekunde darstellen. Diese Variabeln müssen global sein und volatile, um Hardwareeingriffe zu ermöglichen.
+Für die Zeit brauchen wir 3 Verschiedene Variabel, die jeweils die aktuelle Stunde, Minute und Sekunde darstellen. Diese Variabeln müssen global sein und volatile, um Hardwareeingriffe zu ermöglichen. Der Startzeitpunkt wird hier fest gelegt.
 ```
 volatile uint8_t sekunde = 50;
 volatile uint8_t minute = 59;
@@ -124,6 +124,8 @@ TCNT2 = 0x00;
 TIFR |= (1 << TOV2);
 TIMSK |= (1 << TOIE2); //overflow interrupt erlauben
 ```
+Der Taktgeber für Timer 2 wird auf den externen Quarzoszillator geändert. Der Prescaler skaliert um 256.  Im folgenden wird der Timer auf 0 gesetzt. Timer/Counter Interrupt Flag Register wird gesetzt, so dass Timer 2 overflowen kann. Timer/Counter Interrupt Mask Register wird gesetzt so das es beim Overflow von Timer 2 zum Interrupt kommen kann.
+
 Interrupt-Routine für den Overflow-Interrupt des Timer 2 (Quarz):
 ```
 ISR (TIMER2_OVF_vect){
@@ -149,3 +151,4 @@ ISR (TIMER2_OVF_vect){
 	}
 }
 ```
+
