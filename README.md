@@ -89,7 +89,7 @@ Freischalten des Interrupt-Pins am Atmega8 und Konfiguration des Interruppts.
 set_sleep_mode(SLEEP_MODE_PWR_SAVE);
 sei();
 ```
-Konfiguration des Slee-Modes auf einen Modi, der externe Interrupts zu lässt und Ermöglichung von Interrupts durch sei().
+Konfiguration des Sleep-Modes auf einen Modi, der externe Interrupts zu lässt und Ermöglichung von Interrupts durch sei().
 ```
 while(1){
   if(counter >= 30){
