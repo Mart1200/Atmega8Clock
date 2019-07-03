@@ -84,7 +84,7 @@ PORTD |= (1 << PORTD2);//Freigeben interrupt schalter
 MCUCR |= (1<<ISC01) | (1 << ISC00); //setzen des Interrupts auf Flanken;
 GICR |= (1 << INT0); // aktivieren des Interrupts
 ```
-Freischalten des Interrupt-Pins am Atmega8 und Konfiguration des Interruppts.
+Freischalten des Interrupt-Pins am Atmega8 und Konfiguration des Interruppts. Der Interrupt soll bei steigender Flanke ausgelöst.
 ```
 set_sleep_mode(SLEEP_MODE_PWR_SAVE);
 sei();
@@ -151,4 +151,5 @@ ISR (TIMER2_OVF_vect){
 	}
 }
 ```
+In der Zeit wo eine Sekunde vergeht wird 16 mal der Overflow-Interrupt ausgelöst, auf Grund des Prescalers. Also erst nach 16 mal aufrufen des Interrupts soll die Variabel für die Sekunde hochgezählt werden. Falls die Sekunde 60 ereichen würde, wird sie auf 0 gesetzt und die Minute um 1 erhöht. Selbiges geschieht für Minute und Stunde.
 
