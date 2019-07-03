@@ -116,11 +116,36 @@ volatile uint8_t sekunde = 50;
 volatile uint8_t minute = 59;
 volatile uint8_t stunde = 11;
 ```
-Konfiguration des Quarzes:
+Konfiguration des Quarzes und freischalten des Overflow-Interrupts:
 ```
 ASSR |= (1<<AS2);
 TCCR2 |= (1 << CS21); //prescaler timer 2
 TCNT2 = 0x00;
 TIFR |= (1 << TOV2);
 TIMSK |= (1 << TOIE2); //overflow interrupt erlauben
+```
+Interrupt-Routine für den Overflow-Interrupt des Timer 2 (Quarz):
+```
+ISR (TIMER2_OVF_vect){
+	ka++;
+	if ( ka == 16){
+		ka = 0;
+		sekunde++;
+		counter++;
+
+		if(sekunde == 60){
+			minute++;
+			sekunde = 0;
+		}
+
+		if(minute == 60){
+			stunde++;
+			minute = 0;
+		}
+
+		if(stunde == 12){
+			stunde = 0;
+		}
+	}
+}
 ```
