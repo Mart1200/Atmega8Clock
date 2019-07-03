@@ -1,5 +1,5 @@
 # Atmega8Clock
-energie-effeziente Uhr mit dem Atmega8
+energie-effeziente Uhr mit dem Atmega8 auf Basis von [FRANZIS Ping-Pong](https://www.elv.de/franzis-ping-pong-das-retro-spiel-zum-selberbauen-bausatz.html)
 
 ## Die 3 Probleme
 * Anzeige der Zeit
