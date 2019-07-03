@@ -110,6 +110,12 @@ ISR (INT0_vect){
 ```
 Falls der Schalter gedrückt wird resetet der counter und fängt von vorne an zu zählen.
 ## Schalten der Zeit mit externen Quarz
+Für die Zeit brauchen wir 3 Verschiedene Variabel, die jeweils die aktuelle Stunde, Minute und Sekunde darstellen. Diese Variabeln müssen global sein und volatile, um Hardwareeingriffe zu ermöglichen.
+```
+volatile uint8_t sekunde = 50;
+volatile uint8_t minute = 59;
+volatile uint8_t stunde = 11;
+```
 Konfiguration des Quarzes:
 ```
 ASSR |= (1<<AS2);
