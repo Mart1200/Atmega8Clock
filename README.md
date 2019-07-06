@@ -7,7 +7,7 @@ energie-effeziente Uhr mit dem Atmega8 auf Basis von [FRANZIS Ping-Pong](https:/
 * Schalten der Zeit mit externen Quarz
 
 ## Anzeige der Zeit
-Zum Anzeigen der Zeit wird eine LED-Matrix (12x10) genutzt, wo bei die Spalten direkt mit dem Atmega8 kontrolliert werden und Zeilen mit zwei 8-Bit Shiftregister 4094D, wobei die zu vielen Bits in den zweien Shitregister geschoben werden. Da bei wird in diesem Lösungsansatz (von links nach recht) erst Sekunden, dann Minuten, dann Studen jeweils in 2 Spalten dargestellt. Der Code für die Darstellung von Sekunden, Minuten und Stunden sind nahe zu identisch.
+Zum Anzeigen der Zeit wird eine LED-Matrix (12x10) genutzt, wo bei die Spalten direkt mit dem Atmega8 kontrolliert werden und Zeilen mit zwei 8-Bit Shiftregister 4094D, wobei die zu vielen Bits in den zweiten Shiftregister geschoben werden. Da bei wird in diesem Lösungsansatz (von links nach recht) erst Sekunden, dann Minuten, dann Studen jeweils in 2 Spalten dargestellt. Der Code für die Darstellung von Sekunden, Minuten und Stunden sind nahe zu identisch.
 
 Hier erklärt anhand der Funktion für Sekunden:
 ```
