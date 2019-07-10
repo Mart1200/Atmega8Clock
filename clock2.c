@@ -7,8 +7,6 @@ volatile uint8_t sekunde = 50;
 volatile uint8_t minute = 59;
 volatile uint8_t stunde = 11;
 
-volatile uint8_t ka;
-
 volatile uint8_t counter = 0;
 
 
@@ -152,9 +150,6 @@ ISR (INT0_vect){
 }
 
 ISR (TIMER2_OVF_vect){
-	ka++;
-	if ( ka == 16){
-		ka = 0;
 		sekunde++;
 		counter++;
 
@@ -171,7 +166,6 @@ ISR (TIMER2_OVF_vect){
 		if(stunde == 12){
 			stunde = 0;
 		}
-	}
 }
 
 
@@ -184,7 +178,7 @@ int main()
 	GICR |= (1 << INT0); // aktivieren des Interrupts
 
 	ASSR |= (1<<AS2);
-	TCCR2 |= (1 << CS21); //prescaler timer 2
+	TCCR2 |= (1 << CS20) | (1 << CS22); //prescaler timer 2 (128) t(zw interrupt)= (2^BitTimer * prescaler)/Frequenz
 	TCNT2 = 0x00;
 	TIFR |= (1 << TOV2);
 	TIMSK |= (1 << TOIE2); //overflow interrupt erlauben
