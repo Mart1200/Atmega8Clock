@@ -119,19 +119,16 @@ volatile uint8_t stunde = 11;
 Konfiguration des Quarzes und freischalten des Overflow-Interrupts:
 ```
 ASSR |= (1<<AS2);
-TCCR2 |= (1 << CS21); //prescaler timer 2
+TCCR2 |= (1 << CS20) | (1 << CS22); //prescaler timer 2 (128) t(zw interrupt)= (2^BitTimer * prescaler)/Frequenz
 TCNT2 = 0x00;
 TIFR |= (1 << TOV2);
 TIMSK |= (1 << TOIE2); //overflow interrupt erlauben
 ```
-Der Taktgeber für Timer 2 wird auf den externen Quarzoszillator geändert. Der Prescaler skaliert um 256.  Im folgenden wird der Timer auf 0 gesetzt. Timer/Counter Interrupt Flag Register wird gesetzt, so dass Timer 2 overflowen kann. Timer/Counter Interrupt Mask Register wird gesetzt so das es beim Overflow von Timer 2 zum Interrupt kommen kann.
+Der Taktgeber für Timer 2 wird auf den externen Quarzoszillator geändert. Der Prescaler skaliert um 128.  Im folgenden wird der Timer auf 0 gesetzt. Timer/Counter Interrupt Flag Register wird gesetzt, so dass Timer 2 overflowen kann. Timer/Counter Interrupt Mask Register wird gesetzt so das es beim Overflow von Timer 2 zum Interrupt kommen kann.
 
 Interrupt-Routine für den Overflow-Interrupt des Timer 2 (Quarz):
 ```
 ISR (TIMER2_OVF_vect){
-	ka++;
-	if ( ka == 16){
-		ka = 0;
 		sekunde++;
 		counter++;
 
@@ -148,7 +145,6 @@ ISR (TIMER2_OVF_vect){
 		if(stunde == 12){
 			stunde = 0;
 		}
-	}
 }
 ```
 In der Zeit wo eine Sekunde vergeht wird 16 mal der Overflow-Interrupt ausgelöst, auf Grund des Prescalers. Also erst nach 16 mal aufrufen des Interrupts soll die Variabel für die Sekunde hochgezählt werden. Falls die Sekunde 60 ereichen würde, wird sie auf 0 gesetzt und die Minute um 1 erhöht. Selbiges geschieht für Minute und Stunde.
