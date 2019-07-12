@@ -147,5 +147,5 @@ ISR (TIMER2_OVF_vect){
 		}
 }
 ```
-In der Zeit wo eine Sekunde vergeht wird 16 mal der Overflow-Interrupt ausgelöst, auf Grund des Prescalers. Also erst nach 16 mal aufrufen des Interrupts soll die Variabel für die Sekunde hochgezählt werden. Falls die Sekunde 60 ereichen würde, wird sie auf 0 gesetzt und die Minute um 1 erhöht. Selbiges geschieht für Minute und Stunde.
+Durch den Prescaler von 128 tritt dieser Interrupt mit einem Abstand von 1 Sekunde auf. Falls die Sekunde 60 ereichen würde, wird sie auf 0 gesetzt und die Minute um 1 erhöht. Selbiges geschieht für Minute und Stunde.
 
